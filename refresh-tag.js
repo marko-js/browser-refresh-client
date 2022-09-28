@@ -12,6 +12,7 @@ var enabled = scriptUrl != null;
 var parsedUrl;
 
 if (enabled) {
+    require('./special-reload');
     parsedUrl = url.parse(scriptUrl);
     delete parsedUrl.host;
 }
