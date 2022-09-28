@@ -2,8 +2,6 @@
 
 const fs = require("fs");
 const path = require("path");
-let clearCaches;
-
 const compiler = tryRequire("@marko/compiler");
 
 if (compiler) {
@@ -24,14 +22,7 @@ function handleFileModified(filename) {
     return;
   }
 
-  if (clearCaches === undefined) {
-    const compiler = tryRequire("@marko/compiler") || tryRequire("marko/compiler");
-    clearCaches = compiler
-      ? compiler.clearCaches || compiler.taglib.clearCaches
-      : () => {};
-  }
-
-  clearCaches();
+  compiler.taglib.clearCaches();
   console.log(`[marko] File modified: ${cwdRelative(filename)}`);
 
   if (path.extname(filename) === ".json") {
